@@ -327,7 +327,11 @@ def get_steam_path():
     if platform in ("linux", "linux2"):
         # linux
 
-        return os.path.expanduser("~/.var/app/com.valvesoftware.Steam/.steam/steam")
+        # check if flatpak
+        if os.path.isfile("~/.var/app/com.valvesoftware.Steam/.steam/steam"):
+            return os.path.expanduser("~/.var/app/com.valvesoftware.Steam/.steam/steam")
+
+        return os.path.expanduser("~/.steam/debian-installation")
 
     if platform == "darwin":
         # OS X
